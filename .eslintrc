@@ -1,0 +1,54 @@
+{
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "extends": "airbnb-base",
+  "parserOptions" : {
+    "sourceType": "script"
+  },
+  "plugins": [
+    "mocha"
+  ],
+  "rules": {
+    "mocha/no-exclusive-tests": "error",
+    "mocha/no-skipped-tests": "error",
+    "array-bracket-spacing": "off",
+    "brace-style": ["error", "stroustrup"],
+    "consistent-return": "off",
+    "func-names": "off",
+    "indent": ["error", 4, {
+      "SwitchCase": 1
+    }],
+    "max-len": ["error", 120],
+    "no-console": "error",
+    "no-process-env": "error",
+    "no-trailing-spaces": ["error", {
+      "skipBlankLines": true
+    }],
+    "no-unused-vars": [
+      "error",
+      {
+        "args": "none"
+      }
+    ],
+    "no-use-before-define": ["error", "nofunc"],
+    "space-before-function-paren": ["error", "never"],
+    "new-cap": [
+      "error",
+      {
+        "newIsCap": true,
+        "capIsNew": true
+      }
+    ],
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": true,
+        "optionalDependencies": false
+      }
+    ],
+
+
+  }
+}
