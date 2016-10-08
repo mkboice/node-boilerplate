@@ -133,18 +133,31 @@ gulp.task('version-bump', () => {
     const oldVer = packageJson.version;
     const swaggerDoc = yaml.safeLoad(fs.readFileSync(getSwaggerDocPath(), 'utf8'));
 
+    // --version
+    // Sets the version to the provided value. Use with caution. Use the other options when possible.
+    if (argv.version) {
+        const validVersion = semver.valid(argv.version);
+        if (validVersion !== null) {
+            packageJson.version = validVersion;
+        }
+        else {
+            console.log(`Version: ${argv.version} is invalid`);
+            return;
+        }
+    }
+
     // --major
-    if (argv.major) {
+    else if (argv.major) {
         packageJson.version = semver.inc(oldVer, 'major');
     }
 
     // --minor
-    if (argv.minor) {
+    else if (argv.minor) {
         packageJson.version = semver.inc(oldVer, 'minor');
     }
 
     // --patch
-    if (argv.patch || packageJson.version === oldVer) {
+    else if (argv.patch || packageJson.version === oldVer) {
         packageJson.version = semver.inc(oldVer, 'patch');
     }
 
