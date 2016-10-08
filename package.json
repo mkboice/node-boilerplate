@@ -9,7 +9,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "test": "gulp test"
+    "test": "gulp test-cover",
+    "test-ci": "gulp test-cover-ci"
   },
   "dependencies": {
     "bluebird": "3.4.6",
@@ -35,6 +36,7 @@
     "gulp-nsp": "2.4.2",
     "js-yaml": "3.6.1",
     "mocha": "3.1.0",
+    "mocha-junit-reporter": "1.12.0",
     "node-mocks-http": "1.5.4",
     "request-promise": "4.1.1",
     "semver": "5.3.0",

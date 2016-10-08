@@ -73,9 +73,28 @@ gulp.task('test-watch', ['test'], () => {
     gulp.watch([getJSGlob()], ['test']);
 });
 
+// Run tests with coverage reports
 gulp.task('test-cover', ['pre-test'], () =>
     getTestJSFiles()
         .pipe(mocha())
+        .on('error', (err) => {
+            console.log(err);
+            process.exit(1);
+        })
+        // Creating the reports after tests ran
+        .pipe(istanbul.writeReports({ reporters: ['html', 'text', 'text-summary', 'json'] }))
+        // Enforce a coverage of at least 90%
+        .pipe(istanbul.enforceThresholds({ thresholds: { global: coverageThreshold } }))
+        .once('error', () => {
+            console.log(`Coverage Threshold (${coverageThreshold}) failed`);
+            process.exit(1);
+        })
+);
+
+// Run tests and coverage with the mocha-junit-reporter needed for circleci
+gulp.task('test-cover-ci', ['pre-test'], () =>
+    getTestJSFiles()
+        .pipe(mocha({ reporter: 'mocha-junit-reporter' }))
         .on('error', (err) => {
             console.log(err);
             process.exit(1);
